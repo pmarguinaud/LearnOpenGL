@@ -9,10 +9,9 @@ void main()
 
   ivec2 texelCoord = ivec2 (gl_GlobalInvocationID.xy);
   
-  value.r = float (texelCoord.x) / (gl_NumWorkGroups.x * gl_WorkGroupSize.x);
-  value.g = float (texelCoord.y) / (gl_NumWorkGroups.y * gl_WorkGroupSize.y);
-  value.b = 1.0;
-  value.a = 1.0;
+  value = imageLoad (imgOutput, texelCoord);
+
+  value.a = value.a * 0.999;
 
   imageStore (imgOutput, texelCoord, value);
 }
